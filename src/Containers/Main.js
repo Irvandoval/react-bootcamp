@@ -4,33 +4,34 @@ import ClassWithLifeCycleExample from '../Components/ClassWithLifeCycleExample';
 import ClassWithStateExample from '../Components/ClassWithStateExample';
 import FunctionExample from '../Components/FunctionExample';
 import FunctionWithStateExample from '../Components/FunctionWithStateExample';
-//import JSXExample from '../Components/JSXExample';
 
 function Main() {
   const [clear, setClear] = useState(false);
-  const [text, setText] = useState('Your name');
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setClear(true);
     }, 16000);
+
+    return () => {
+      /**
+       * Clear the timer, or you'll get an error
+       * timer will continue working even after component
+       * has been unmounted, to avoid that lacky of memory, we use
+       * the cleaunp of useEffect
+       */
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <>
-      <button onClick={() => setText('xxxxxxxxxxxxxxxx')}> change new text</button>
-      <div className="App-examples">
-        <ClassExample />
-        <ClassWithStateExample text={text} setText={setText}/>
-        {!clear && <ClassWithLifeCycleExample />}
-        <FunctionExample />
-        {!clear && <FunctionWithStateExample />}
-      </div>
-
-      {/*<div className="App-examples">
-        <JSXExample />
-  </div>*/}
-    </>
+    <div className="App-examples">
+      <ClassExample />
+      <ClassWithStateExample />
+      {!clear && <ClassWithLifeCycleExample />}
+      <FunctionExample />
+      {!clear && <FunctionWithStateExample />}
+    </div>
   );
 }
 

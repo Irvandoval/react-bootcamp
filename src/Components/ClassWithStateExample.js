@@ -10,8 +10,6 @@ class ClassWithStateExample extends Component {
     this.state = {
       text: 'Hello there!',
       visits: 0,
-      newText: props.text,
-      setNewText: props.setText
     };
   }
 
@@ -21,7 +19,6 @@ class ClassWithStateExample extends Component {
      */
     return (
       <div className="App-example">
-        <p>{this.state.newText}</p>
         <p>{this.state.text}</p>
         <span>Visits: {this.state.visits}</span>
       </div>

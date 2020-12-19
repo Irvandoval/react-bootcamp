@@ -20,6 +20,9 @@ function Menu() {
         <li>
           <Link to="/todos">Todo List</Link>
         </li>
+        <li>
+          <Link to="/apis">API Interactions</Link>
+        </li>
       </ul>
     </nav>
   );

@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.FormGroup {
+  padding: 16px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -76,7 +80,7 @@ ul li {
 
 .Todos-Container {
   text-align: left;
-  width: 500px;
+  max-width: 500px;
 }
 .Todo-Item-Container {
   margin-top: 15px;
@@ -125,7 +129,7 @@ ul li {
 }
 
 .Todo-Navbar input {
-  width: 150px;
+  max-width: 150px;
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 18px;
@@ -139,7 +143,7 @@ ul li {
 }
 
 .Todo-Navbar button {
-  width: 100px;
+  max-width: 100px;
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 18px;
@@ -147,6 +151,58 @@ ul li {
 }
 .Todo-Navbar button:focus,
 .Todo-Navbar button:active {
+  outline: none;
+  box-shadow: 0px 0px 2px black;
+}
+
+/* Blog */
+.Blog-Container {
+  text-align: left;
+  max-width: 1260px;
+  margin: 40px;
+}
+.Blog-User,
+.Blog-Post,
+.Blog-Comment,
+.Blog-Album,
+.Blog-Photo {
+  padding: 12px;
+  border: 1px solid lightgray;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.Blog-User span,
+.Blog-Post span,
+.Blog-Album span {
+  word-wrap: break-word;
+  display: block;
+}
+.Blog-Comments,
+.Blog-Photos {
+  margin: 15px 15px 15px 40px;
+  font-style: italic;
+  font-size: 14px;
+}
+.Blog-Comment,
+.Blog-Photo {
+  cursor: default;
+}
+.Blog-Posts-Container,
+.Blog-Albums-Container {
+  flex: 1;
+  margin: 40px;
+}
+
+.Blog-Comments input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 18px;
+}
+
+.Blog-Comments input:focus,
+.Blog-Comments input:active {
   outline: none;
   box-shadow: 0px 0px 2px black;
 }

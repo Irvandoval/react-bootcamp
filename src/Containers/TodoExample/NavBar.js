@@ -32,7 +32,7 @@ function NavBar() {
             required: 'Required',
           })}
         />
-        {errors.description && errors.description.message}
+        {errors.description?.message}
 
         <input
           type="date"

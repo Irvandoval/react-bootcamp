@@ -5,6 +5,10 @@ import StateVsProps from '../../Containers/StateVsProps';
 import ThinkingInReact from '../../Containers/ThinkingInReact';
 import JSXExample from '../../Containers/JSXExample';
 import TodoExample from '../../Containers/TodoExample';
+import APIInteractions from '../../Containers/APIInteractions';
+import Countries from '../../Containers/APIInteractions/Countries';
+import Blog from '../../Containers/APIInteractions/Blog';
+import PostUser from '../../Containers/APIInteractions/PostUser';
 import NoMatch from './NoMatch';
 import Menu from './Menu';
 
@@ -35,6 +39,18 @@ function Routing() {
           </Route>
           <Route path="/todos">
             <TodoExample />
+          </Route>
+          <Route path="/apis">
+            <APIInteractions />
+          </Route>
+          <Route path="/countries">
+            <Countries />
+          </Route>
+          <Route path="/blog">
+            <Blog />
+          </Route>
+          <Route path="/post-user">
+            <PostUser />
           </Route>
           <Route path="*">
             <NoMatch />

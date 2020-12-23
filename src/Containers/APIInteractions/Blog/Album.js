@@ -1,3 +1,4 @@
+import { Box, Image, Text } from 'grommet';
 import React, { useState } from 'react';
 
 function Album({ album, handleOnClick }) {
@@ -9,29 +10,59 @@ function Album({ album, handleOnClick }) {
   };
 
   return (
-    <div key={album.id} onClick={onClick} className="Blog-Album">
-      <span>
-        <strong>{album.title}</strong>
-      </span>
+    <Box background="light-3" pad="xsmall">
+      <Box
+        align="stretch"
+        border={{ color: 'dark-1', size: 'xxsmall' }}
+        pad={{ vertical: 'small', horizontal: 'medium' }}
+        round="medium"
+        elevation="medium"
+        margin="xsmall"
+        gap="xsmall"
+        onClick={onClick}
+      >
+        <Text weight="bold" size="xsmall">
+          {album.title}
+        </Text>
+      </Box>
 
       {open && (
-        <div className="Blog-Photos">
+        <Box
+          background="light-1"
+          pad="xsmall"
+          margin={{ left: 'large' }}
+          round="small"
+        >
           {album.photos &&
             album.photos.map &&
             album.photos.map((photo) => {
               return (
-                <div key={photo.id} className="Blog-Photo">
-                  <span>
-                    <strong>Title: </strong>
+                <Box
+                  align="stretch"
+                  border={{ color: 'dark-1', size: 'xxsmall' }}
+                  pad={{ vertical: 'small', horizontal: 'medium' }}
+                  round="medium"
+                  elevation="medium"
+                  margin="xsmall"
+                  gap="xsmall"
+                  direction="row"
+                  key={photo.id}
+                >
+                  <Text weight="bold" size="xsmall">
                     {photo.title}
-                  </span>
-                  <img src={photo.thumbnailUrl} alt={photo.title} width="45" />
-                </div>
+                  </Text>
+                  <Image
+                    fit="contain"
+                    src={photo.thumbnailUrl}
+                    alt={photo.title}
+                    height="25"
+                  />
+                </Box>
               );
             })}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

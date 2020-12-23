@@ -1,13 +1,14 @@
+import { Box } from 'grommet';
 import React from 'react';
 import Country from './Country';
 
 function List({ countries }) {
   return (
-    <div>
+    <Box pad="xsmall" direction="row-responsive" gap="small" wrap>
       {countries.map((country) => {
         return <Country country={country} key={country.alpha3Code} />;
       })}
-    </div>
+    </Box>
   );
 }
 

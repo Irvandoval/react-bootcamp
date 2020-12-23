@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { Box, Heading, Text } from 'grommet';
 import React, { useContext, useEffect, useState } from 'react';
 import { BlogContext } from './Context';
 import Post from './Post';
@@ -13,7 +14,9 @@ function Posts() {
     Axios.get(
       `https://jsonplaceholder.typicode.com/users/${selectedUser.id}/posts`
     )
-      .then((result) => setPosts(result.data))
+      .then((result) => {
+        setPosts(result.data);
+      })
       .catch((err) => {
         console.error(err);
       });
@@ -60,13 +63,15 @@ function Posts() {
   };
 
   return (
-    <div className="Blog-Posts-Container">
-      <h3>
+    <Box gridArea="main1" background="light-1" pad="xsmall">
+      <Heading level="3" margin="none" color="dark-1">
         Hey look!, Here's a list of posts from{' '}
-        <strong>{selectedUser.name}</strong>
-      </h3>
+        <Text color="brand" weight="bold" size="8">
+          {selectedUser.name}
+        </Text>
+      </Heading>
 
-      <div className="Blog-Posts">
+      <Box pad="xsmall">
         {posts.map((post) => {
           return (
             <Post
@@ -77,8 +82,8 @@ function Posts() {
             />
           );
         })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

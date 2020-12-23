@@ -1,3 +1,4 @@
+import { Box } from 'grommet';
 import React from 'react';
 import TodosProvider from './Context';
 import List from './List';
@@ -5,12 +6,16 @@ import NavBar from './NavBar';
 
 function TodoExample() {
   return (
-    <div className="Todos-Container">
+    <Box
+      background="light-1"
+      border={{ color: 'brand', size: 'large' }}
+      pad="medium"
+    >
       <TodosProvider>
         <NavBar />
         <List />
       </TodosProvider>
-    </div>
+    </Box>
   );
 }
 

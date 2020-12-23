@@ -1,21 +1,18 @@
+import { Tab, Tabs } from 'grommet';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Blog from './Blog';
+import Countries from './Countries';
 
 function APIInteractions() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/countries">REST Countries</Link>
-        </li>
-        <li>
-          <Link to="/blog">REST Blog</Link>
-        </li>
-        <li>
-          <Link to="/post-user">REST User</Link>
-        </li>
-      </ul>
-    </nav>
+    <Tabs margin="medium">
+      <Tab title="REST Countries">
+        <Countries />
+      </Tab>
+      <Tab title="REST Blog">
+        <Blog />
+      </Tab>
+    </Tabs>
   );
 }
 

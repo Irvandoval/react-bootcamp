@@ -1,5 +1,16 @@
 import Axios from 'axios';
+import {
+  Anchor,
+  Box,
+  Form,
+  Grid,
+  Heading,
+  Select,
+  Text,
+  TextInput,
+} from 'grommet';
 import React, { useCallback, useEffect, useState } from 'react';
+import Spinner from '../../../Components/Grommet/Spinner';
 import List from './List';
 
 function Countries() {
@@ -33,66 +44,82 @@ function Countries() {
     fetchCountries();
   }, [fetchCountries]);
 
+  useEffect(() => {
+    console.log('Hey i mounted because you selected this tab');
+    return () => {
+      console.log('You selected the other tab. Goodbye!');
+    };
+  }, []);
+
   const handleSearchForChange = (val) => {
     setSearchFor(val);
     setQuery(val === 'name' ? 'el salvador' : 'es');
   };
 
   return (
-    <div style={{ margin: 40 }}>
-      <h3>
+    <Box pad="medium" gap="medium">
+      <Heading level="4" margin="none" color="controls">
         Hey look!, here is a list of countries matching your search criteria
-      </h3>
-      <h5>
+      </Heading>
+
+      <Heading level="5" margin="none" color="controls">
         Using Axios for asynchronous HTTP requests and async/await promises
         handler
-      </h5>
-      <h6>
-        <a href="https://restcountries.eu/rest/v2/all">
-          https://restcountries.eu/rest/v2/all
-        </a>
-      </h6>
+      </Heading>
 
-      {isError && <div style={{ color: 'red' }}>Something went wrong!...</div>}
+      <Heading level="6" margin="none" color="controls">
+        <Anchor
+          href="https://restcountries.eu/rest/v2/all"
+          label="https://restcountries.eu/rest/v2/all"
+        />
+      </Heading>
 
-      <div style={{ textAlign: 'left' }}>
-        <select
-          value={searchFor}
-          onChange={(e) => handleSearchForChange(e.target.value)}
-        >
-          <option value="name">Name</option>
-          <option value="lang">Language</option>
-        </select>
+      {isError && <Text color="status-error">Something went wrong!...</Text>}
 
-        {searchFor === 'name' && (
-          <input
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        )}
+      <Grid>
+        <Box pad="none">
+          <Form>
+            <Box direction="row" gap="medium">
+              <Select
+                value={searchFor}
+                onChange={({ value }) => handleSearchForChange(value)}
+                options={[
+                  { key: 'name', label: 'Name' },
+                  { key: 'lang', label: 'Language' },
+                ]}
+                labelKey="label"
+                valueKey={{ key: 'key', reduce: true }}
+              />
 
-        {searchFor === 'lang' && (
-          <select value={query} onChange={(e) => setQuery(e.target.value)}>
-            {[
-              { lang: 'es', label: 'Spanish' },
-              { lang: 'en', label: 'English' },
-              { lang: 'fr', label: 'French' },
-              { lang: 'de', label: 'German' },
-            ].map((language) => {
-              return (
-                <option key={language.lang} value={language.lang}>
-                  {language.label}
-                </option>
-              );
-            })}
-          </select>
-        )}
+              {searchFor === 'name' && (
+                <TextInput
+                  placeholder="Search..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+              )}
 
-        {isLoading ? <div>Loading ...</div> : <List countries={countries} />}
-      </div>
-    </div>
+              {searchFor === 'lang' && (
+                <Select
+                  value={query}
+                  onChange={({ value }) => setQuery(value)}
+                  options={[
+                    { lang: 'es', label: 'Spanish' },
+                    { lang: 'en', label: 'English' },
+                    { lang: 'fr', label: 'French' },
+                    { lang: 'de', label: 'German' },
+                  ]}
+                  labelKey="label"
+                  valueKey={{ key: 'lang', reduce: true }}
+                />
+              )}
+            </Box>
+          </Form>
+
+          {isLoading ? <Spinner /> : <List countries={countries} />}
+        </Box>
+      </Grid>
+    </Box>
   );
 }
 

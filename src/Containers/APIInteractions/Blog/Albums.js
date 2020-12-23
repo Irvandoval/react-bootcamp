@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { BlogContext } from './Context';
 import Album from './Album';
+import { Box, Heading, Text } from 'grommet';
 
 function Albums() {
   const {
@@ -42,20 +43,22 @@ function Albums() {
   };
 
   return (
-    <div className="Blog-Albums-Container">
-      <h3>
+    <Box gridArea="main2" background="light-1" pad="xsmall">
+      <Heading level="3" margin="none" color="dark-1">
         Hey look!, Here's a list of albums from{' '}
-        <strong>{selectedUser.name}</strong>
-      </h3>
+        <Text color="brand" weight="bold" size="8">
+          {selectedUser.name}
+        </Text>
+      </Heading>
 
-      <div className="Blog-Albums">
+      <Box pad="xsmall">
         {albums.map((album) => {
           return (
             <Album key={album.id} album={album} handleOnClick={fetchPhotos} />
           );
         })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

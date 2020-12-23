@@ -1,36 +1,61 @@
 import React from 'react';
 import { DateTime } from 'luxon';
+import { Box, Button, CheckBox, Heading, Text } from 'grommet';
+import { FormClose } from 'grommet-icons';
 
 function Item({ todo, update, remove }) {
   return (
-    <div className="Todo-Item">
-      <input
-        type="checkbox"
+    <Box
+      align="stretch"
+      border={{ color: 'dark-1', size: 'xxsmall' }}
+      pad={{ vertical: 'small', horizontal: 'medium' }}
+      round="medium"
+      elevation="medium"
+      margin="xsmall"
+      direction="row"
+      gap="medium"
+    >
+      <CheckBox
         checked={todo.completed}
-        onChange={(e) => update(todo.id, { completed: !todo.completed })}
+        onChange={() => update(todo.id, { completed: !todo.completed })}
       />
 
-      <div className="Todo-Description">
-        <span className={todo.completed ? 'completed' : ''}>
+      <Box gap="xxsmall">
+        <Text
+          style={
+            todo.completed
+              ? {
+                  textDecorationLine: 'line-through',
+                  fontStyle: 'italic',
+                  fontWeight: 'bolder',
+                }
+              : {}
+          }
+        >
           {todo.description}
-        </span>
-        <span className="Todo-DateTo">
+        </Text>
+        <Text color="dark-3" size="small" style={{ fontStyle: 'italic' }}>
           {DateTime.fromISO(todo.dateTo).toLocaleString(DateTime.DATE_HUGE)}
-        </span>
-      </div>
+        </Text>
+      </Box>
 
-      <button type="button" onClick={(e) => remove(todo.id)}>
-        X
-      </button>
-    </div>
+      <Button
+        type="button"
+        alignSelf="end"
+        margin="none"
+        hoverIndicator
+        icon={<FormClose />}
+        onClick={() => remove(todo.id)}
+      />
+    </Box>
   );
 }
 
 export function Category({ category }) {
   return (
-    <div className="Todo-Category">
+    <Heading color="dark-1" level="4" margin="xxsmall">
       <span>{category}</span>
-    </div>
+    </Heading>
   );
 }
 

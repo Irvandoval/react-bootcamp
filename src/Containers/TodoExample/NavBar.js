@@ -1,14 +1,9 @@
 import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
-import { DateTime } from 'luxon';
 import { TodosContext } from './Context';
-
-const now = DateTime.local().toISODate();
+import { Box, Button, DateInput, Form, FormField, Grid } from 'grommet';
 
 function NavBar() {
   const [, setTodos] = useContext(TodosContext);
-
-  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (values) => {
     setTodos((todos) => [
@@ -22,31 +17,28 @@ function NavBar() {
   };
 
   return (
-    <div className="Todo-Navbar">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          name="description"
-          placeholder="I want to..."
-          ref={register({
-            required: 'Required',
-          })}
-        />
-        {errors.description?.message}
+    <Grid>
+      <Box pad="none">
+        <Form onSubmit={({ value }) => onSubmit(value)}>
+          <Box direction="row" gap="medium">
+            <FormField
+              name="description"
+              label="Description"
+              placeholder="I want to..."
+              required
+            />
 
-        <input
-          type="date"
-          name="dateTo"
-          ref={register({
-            required: 'Required',
-          })}
-          min={now}
-        />
-        {errors.dateTo && errors.dateTo.message}
+            <FormField label="Date To">
+              <DateInput name="dateTo" format="mm/dd/yyyy" />
+            </FormField>
 
-        <button type="submit">Add</button>
-      </form>
-    </div>
+            <Box direction="row" gap="medium">
+              <Button type="submit" primary label="Add" />
+            </Box>
+          </Box>
+        </Form>
+      </Box>
+    </Grid>
   );
 }
 

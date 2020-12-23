@@ -1,58 +1,41 @@
+import { CheckBox, DataTable, Form, FormField, Text, TextInput } from 'grommet';
 import React, { useContext, useState } from 'react';
 import { ProductContext } from './Context';
 import { PRODUCTS } from './data';
 
-export function ProductCategoryRow({ category }) {
-  return (
-    <tr>
-      <th colSpan="2">{category}</th>
-    </tr>
-  );
-}
-
-export function ProductRow({ product }) {
-  const name = product.stocked ? (
-    product.name
-  ) : (
-    <span style={{ color: 'red' }}>{product.name}</span>
-  );
-
-  return (
-    <tr>
-      <td>{name}</td>
-      <td>{product.price}</td>
-    </tr>
-  );
-}
-
 export function ProductTable() {
   const [products] = useContext(ProductContext);
-  const rows = [];
-  let lastCategory = null;
-
-  products.forEach((product) => {
-    if (product.category !== lastCategory) {
-      rows.push(
-        <ProductCategoryRow
-          key={product.category}
-          category={product.category}
-        />
-      );
-    }
-    rows.push(<ProductRow key={product.name} product={product} />);
-    lastCategory = product.category;
-  });
 
   return (
-    <table width="280">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <DataTable
+      background={['light-2', 'default']}
+      columns={[
+        {
+          property: 'category',
+          header: 'Category',
+          search: true,
+        },
+        {
+          property: 'name',
+          header: 'Name',
+          primary: true,
+          search: true,
+          render: (product) =>
+            product.stocked ? (
+              product.name
+            ) : (
+              <Text color="secondary">{product.name}</Text>
+            ),
+        },
+        {
+          property: 'price',
+          header: 'Price',
+          search: true,
+        },
+      ]}
+      data={products}
+      resizeable
+    />
   );
 }
 
@@ -83,20 +66,21 @@ export function SearchBar() {
   };
 
   return (
-    <form>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-      <p>
-        <input
-          type="checkbox"
+    <Form>
+      <FormField>
+        <TextInput
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      </FormField>
+      <FormField>
+        <CheckBox
+          label="Only show products in stock"
           onChange={(e) => handleChange(e.target.checked)}
-        />{' '}
-        Only show products in stock
-      </p>
-    </form>
+          toggle
+        />
+      </FormField>
+    </Form>
   );
 }

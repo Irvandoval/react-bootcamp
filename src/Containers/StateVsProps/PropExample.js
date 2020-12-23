@@ -1,31 +1,39 @@
+import { Box, Button, List } from 'grommet';
+import { FormClose } from 'grommet-icons';
 import React from 'react';
 
-function PropExample({ animal }) {
+function PropExample(props) {
+  const { animal, onRemove } = props;
   return (
-    <div
-      style={{
-        display: 'inline-grid',
-        margin: 15,
-        border: '1px solid gray',
-        padding: 5,
-      }}
+    <Box
+      align="stretch"
+      border={{ color: 'secondary', size: 'large' }}
+      pad="small"
+      round="medium"
+      elevation="medium"
+      margin="xxsmall"
     >
-      <span>
-        <strong>ID</strong>
-        {`: `}
-        {animal.id}
-      </span>
-      <span>
-        <strong>Name</strong>
-        {`: `}
-        {animal.name}
-      </span>
-      <span>
-        <strong>Group</strong>
-        {`: `}
-        {animal.group}
-      </span>
-    </div>
+      <Button
+        type="button"
+        alignSelf="end"
+        margin="none"
+        hoverIndicator
+        icon={<FormClose />}
+        onClick={() => onRemove(animal.id)}
+      />
+
+      <List
+        primaryKey="key"
+        secondaryKey="value"
+        data={[
+          { key: 'ID', value: animal.id },
+          { key: 'Name', value: animal.name },
+          { key: 'Group', value: animal.group },
+        ]}
+        margin="none"
+        pad="xxsmall"
+      />
+    </Box>
   );
 }
 

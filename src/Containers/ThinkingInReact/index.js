@@ -1,15 +1,20 @@
+import { Box } from 'grommet';
 import React from 'react';
 import { ProductTable, SearchBar } from './Components';
 import ProductProvider from './Context';
 
 function ThinkingInReact() {
   return (
-    <div style={{ textAlign: 'left' }}>
+    <Box
+      background="light-1"
+      border={{ color: 'brand', size: 'large' }}
+      pad="medium"
+    >
       <ProductProvider>
         <SearchBar />
         <ProductTable />
       </ProductProvider>
-    </div>
+    </Box>
   );
 }
 

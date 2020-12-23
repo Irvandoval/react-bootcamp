@@ -1,19 +1,26 @@
 import Axios from 'axios';
+import { Box, Text, TextInput } from 'grommet';
 import React, { useState } from 'react';
 
 function Comment({ comment }) {
   return (
-    <div key={comment.id} className="Blog-Comment">
-      <span>
-        <strong>Name: </strong>
+    <Box
+      align="stretch"
+      border={{ color: 'dark-1', size: 'xxsmall' }}
+      pad={{ vertical: 'small', horizontal: 'medium' }}
+      round="medium"
+      elevation="medium"
+      margin="xsmall"
+      gap="xsmall"
+    >
+      <Text weight="bold" size="xsmall">
         {comment.name}
-      </span>
-      <span>
-        <strong>Email: </strong>
+      </Text>
+      <Text size="xsmall" color="brand">
         {comment.email}
-      </span>
-      <span>{comment.body}</span>
-    </div>
+      </Text>
+      <Text size="xsmall">{comment.body}</Text>
+    </Box>
   );
 }
 
@@ -54,31 +61,46 @@ function Post({ post, handleOnClick, addComment }) {
   };
 
   return (
-    <div key={post.id} className="Blog-Post">
-      <div onClick={onClick}>
-        <span>
-          <strong>{post.title}</strong>
-        </span>
-        <span>{post.body}</span>
-      </div>
+    <Box background="light-3" pad="xsmall">
+      <Box
+        align="stretch"
+        border={{ color: 'dark-1', size: 'xxsmall' }}
+        pad={{ vertical: 'small', horizontal: 'medium' }}
+        round="medium"
+        elevation="medium"
+        margin="xsmall"
+        gap="xsmall"
+        onClick={onClick}
+      >
+        <Text weight="bold" size="xsmall">
+          {post.title}
+        </Text>
+        <Text size="xsmall" truncate={!open}>
+          {post.body}
+        </Text>
+      </Box>
 
       {open && (
-        <div className="Blog-Comments">
+        <Box
+          background="light-1"
+          pad="xsmall"
+          margin={{ left: 'large' }}
+          round="small"
+        >
           {post.comments &&
             post.comments.map &&
             post.comments.map((comment) => {
               return <Comment key={comment.id} comment={comment} />;
             })}
 
-          <input
-            type="text"
+          <TextInput
             placeholder="Add a comment..."
             onChange={(e) => setCommentText(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

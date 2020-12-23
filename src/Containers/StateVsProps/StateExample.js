@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropExample from './PropExample';
-import { useForm } from 'react-hook-form';
+import { Box, Button, Form, FormField, Grid, Heading, Select } from 'grommet';
 
 function StateExample() {
   const [animals, setAnimals] = useState([
@@ -11,7 +11,6 @@ function StateExample() {
     { id: 84541, name: 'Eaggle', group: 'Bird' },
     { id: 73906, name: 'Bear', group: 'Mammal' },
   ]);
-  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (values) => {
     setAnimals((oldAnimals) => [
@@ -20,44 +19,74 @@ function StateExample() {
     ]);
   };
 
+  const onRemove = (id) => {
+    setAnimals((oldAnimals) =>
+      oldAnimals.filter((animal) => {
+        return animal.id !== id;
+      })
+    );
+  };
+
   return (
     <div>
-      <h2>Hey look!, here's a collection of animals</h2>
+      <Heading margin="none" color="light-1" level="3">
+        Hey look!, here's a collection of animals
+      </Heading>
 
-      {animals.map((animal) => {
-        return <PropExample key={animal.id.toString()} animal={animal} />;
-      })}
+      <Box pad="xsmall" direction="row-responsive" gap="medium" wrap>
+        {animals.map((animal) => {
+          return (
+            <PropExample
+              key={animal.id.toString()}
+              animal={animal}
+              onRemove={onRemove}
+            />
+          );
+        })}
+      </Box>
 
-      <h3>Wanna add another animal?</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          name="name"
-          ref={register({
-            required: 'Required',
-          })}
-        />
-        {errors.name && errors.name.message}
+      <Heading color="light-1" level="4">
+        Wanna add another animal?
+      </Heading>
 
-        <select
-          name="group"
-          ref={register({
-            required: 'Required',
-          })}
-        >
-          <option value="">----</option>
-          {['Mammal', 'Reptile', 'Fish', 'Bird', 'Insect'].map((group) => {
-            return (
-              <option key={group} value={group}>
-                {group}
-              </option>
-            );
-          })}
-        </select>
-        {errors.group && errors.group.message}
+      <Grid>
+        <Box pad="none">
+          <Form onSubmit={({ value }) => onSubmit(value)}>
+            <Box direction="row" gap="medium">
+              <FormField
+                name="name"
+                label="Name"
+                placeholder="name..."
+                required
+              />
 
-        <button type="submit">Add</button>
-      </form>
+              <FormField
+                label="Group"
+                name="group"
+                placeholder="Select a group"
+                component={Select}
+                options={[
+                  'Mammal',
+                  'Reptile',
+                  'Fish',
+                  'Bird',
+                  'Insect',
+                  'Amphibian',
+                  'Dinosaur',
+                  'Sea Reptile',
+                  'Politician',
+                ]}
+                required
+              />
+
+              <Box direction="row" gap="medium">
+                <Button type="submit" primary label="Add" />
+                <Button type="reset" label="Reset" />
+              </Box>
+            </Box>
+          </Form>
+        </Box>
+      </Grid>
     </div>
   );
 }

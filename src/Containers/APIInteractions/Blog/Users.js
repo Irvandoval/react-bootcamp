@@ -1,4 +1,14 @@
 import Axios from 'axios';
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Grid,
+  Text,
+} from 'grommet';
+import { User } from 'grommet-icons';
 import React, { useContext, useEffect } from 'react';
 import Albums from './Albums';
 import { BlogContext } from './Context';
@@ -21,37 +31,63 @@ function Users() {
   }, [setUsers]);
 
   return (
-    <div className="Blog-UserList">
+    <Box pad="xsmall" direction="row-responsive" gap="small" wrap>
       {selectedUser ? (
-        <div style={{ display: 'flex' }}>
-          <Posts />
-          <Albums />
-        </div>
+        <Grid>
+          <Box align="stretch" pad={{ horizontal: 'large' }}>
+            <Grid
+              areas={[
+                { name: 'main1', start: [0, 0], end: [0, 0] },
+                { name: 'main2', start: [1, 0], end: [1, 0] },
+              ]}
+              columns={['large', 'large']}
+              rows={['flex', 'auto']}
+              gap="small"
+              fill
+            >
+              <Posts />
+              <Albums />
+            </Grid>
+          </Box>
+        </Grid>
       ) : (
         users.map((user) => {
           return (
-            <div
+            <Box
+              align="stretch"
+              border={{ color: 'dark-1', size: 'xxsmall' }}
+              pad={{ vertical: 'small', horizontal: 'medium' }}
+              round="medium"
+              elevation="medium"
+              margin="xsmall"
+              direction="row"
+              gap="small"
               key={user.id}
               onClick={() => setSelectedUser(user)}
-              className="Blog-User"
             >
-              <span>
-                <strong>Name: </strong>
-                {user.name}
-              </span>
-              <span>
-                <strong>Username: </strong>
-                {user.username}
-              </span>
-              <span>
-                <strong>Email: </strong>
-                {user.email}
-              </span>
-            </div>
+              <Card height="small" background="light-3">
+                <CardHeader pad="small">
+                  <User color="plain" />
+                  <Text>{user.name}</Text>
+                </CardHeader>
+                <CardBody pad="small">
+                  <Text color="controls" weight="bold">
+                    Username
+                  </Text>
+                  <Text> {user.username}</Text>
+                </CardBody>
+                <CardFooter pad={{ horizontal: 'small' }} background="dark-2">
+                  <Text color="brand" weight="bold">
+                    Email
+                  </Text>
+                  <Text> {user.email}</Text>
+                </CardFooter>
+              </Card>
+            </Box>
           );
         })
       )}
-    </div>
+    </Box>
   );
 }
 

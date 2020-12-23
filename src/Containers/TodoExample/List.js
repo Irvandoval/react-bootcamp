@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { DateTime } from 'luxon';
 import { TodosContext } from './Context';
 import Item, { Category } from './Item';
+import { Box, Grid } from 'grommet';
 
 const categories = [
   'Past',
@@ -74,42 +75,44 @@ function List() {
    * the todos to get the ones included in current category
    */
   return (
-    <div>
-      {categories.map((category) => {
-        /**
-         * Getting items in category
-         */
-        const items = list.filter((item) => {
-          return item.category === category;
-        });
+    <Grid>
+      <Box pad="none">
+        {categories.map((category) => {
+          /**
+           * Getting items in category
+           */
+          const items = list.filter((item) => {
+            return item.category === category;
+          });
 
-        /**
-         * No items found
-         */
-        if (items.length === 0) {
-          return null;
-        }
+          /**
+           * No items found
+           */
+          if (items.length === 0) {
+            return null;
+          }
 
-        /**
-         * Render category, then we loop over items and render them.
-         */
-        return (
-          <div key={category} className="Todo-Item-Container">
-            <Category category={category} />
-            {items.map((item) => {
-              return (
-                <Item
-                  key={item.id}
-                  todo={item}
-                  update={update}
-                  remove={remove}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
+          /**
+           * Render category, then we loop over items and render them.
+           */
+          return (
+            <Box gap="xsmall" margin="small" key={category}>
+              <Category category={category} />
+              {items.map((item) => {
+                return (
+                  <Item
+                    key={item.id}
+                    todo={item}
+                    update={update}
+                    remove={remove}
+                  />
+                );
+              })}
+            </Box>
+          );
+        })}
+      </Box>
+    </Grid>
   );
 }
 

@@ -68,6 +68,15 @@ function Menu() {
           </Text>
         </Link>
       </Box>
+
+      <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+        <Link to="/redux-toolkit">
+          <Node color="light-1" />
+          <Text size="large" color="light-1" margin="small">
+            Redux Toolkit
+          </Text>
+        </Link>
+      </Box>
     </Box>
   );
 }

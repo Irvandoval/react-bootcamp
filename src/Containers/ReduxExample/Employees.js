@@ -16,9 +16,7 @@ export const Employees = (props) => {
   };
 
   return (
-    <Box gridArea="main1" background="light-1" pad="medium" gap="medium" style={{
-      overflowX: 'auto'
-    }}>
+    <Box gridArea="main1" background="light-1" pad="medium" gap="medium">
       <Heading level="3" margin="none" color="brand">
         Hey look!, Here's a list of employees
       </Heading>
@@ -82,7 +80,7 @@ Employees.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  employees: state.employees,
+  employees: state.root.employees,
 });
 
 const actions = {

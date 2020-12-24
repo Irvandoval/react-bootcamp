@@ -1,4 +1,4 @@
-import { employees } from './data';
+import { employees } from '../data';
 
 const initialState = {
   employees,
@@ -16,7 +16,7 @@ function rootReducer(state = initialState, action) {
         employeeCode: `E${state.lastCode + 1}`,
         emailAddress: `${action.payload.firstName.toLowerCase()}.${action.payload.lastName.toLowerCase()}@learningcontainer.com`,
       };
-      
+
       return {
         ...state,
         employees: state.employees.concat(employee),

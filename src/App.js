@@ -57,11 +57,13 @@ function App() {
                 <Heading level="4" margin="none">
                   Hey look!, I'm using Groomet
                 </Heading>
+
                 <Button
                   icon={<Apps />}
                   onClick={() => setShowSidebar(!showSidebar)}
                 />
               </AppBar>
+
               <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
                 <Box flex align="baseline" justify="center" pad="medium">
                   <Routing />

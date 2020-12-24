@@ -84,7 +84,7 @@ function JSXExample() {
                 <Button
                   key={color}
                   type="button"
-                  size="large"
+                  size="small"
                   margin="xsmall"
                   onClick={(event) => setBackgroundColor(color)}
                   label={`${color.charAt(0).toUpperCase()}${color.slice(1)}`}

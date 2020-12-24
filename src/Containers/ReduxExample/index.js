@@ -9,7 +9,7 @@ function ReduxExample(props) {
   return (
     <Main pad="medium">
       <Grid>
-        <Box align="stretch" pad={{ horizontal: 'large' }} margin={{top: '200px'}}>
+        <Box align="stretch" pad={{ horizontal: 'large' }}>
           <Grid
             areas={[
               { name: 'main1', start: [0, 0], end: [0, 0] },
@@ -35,9 +35,9 @@ ReduxExample.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  formIsOpen: state.formIsOpen,
-  selectedEmployeeId: state.selectedEmployeeId
-    ? state.selectedEmployeeId
+  formIsOpen: state.root.formIsOpen,
+  selectedEmployeeId: state.root.selectedEmployeeId
+    ? state.root.selectedEmployeeId
     : 'none',
 });
 

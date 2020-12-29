@@ -38,7 +38,7 @@ function SidebarLayer({ onClose, handleCreate }) {
       onClickOutside={onClose}
     >
       <Box
-        background="controls"
+        background="harmonie-4"
         overflow="auto"
         fill="vertical"
         width="medium"

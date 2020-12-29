@@ -12,9 +12,6 @@ import { Close, Edit } from 'grommet-icons';
 import React from 'react';
 
 function Profile({ profile, onRemove }) {
-  alert('//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80');
-  alert('Use breaking bad characters avatar');
-
   return (
     <Box
       align="stretch"

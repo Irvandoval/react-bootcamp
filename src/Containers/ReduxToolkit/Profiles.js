@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Profile from './Profile';
 import SidebarLayer from './SidebarLayer';
 import { fetchData, onCreate, onRemove, onUpdate } from './thunks';
+import { setData } from '../../redux/reducers/appSlice';
 
 function Profiles() {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -12,7 +13,22 @@ function Profiles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchData());
+    const timer = setTimeout(() => {
+      dispatch(fetchData());
+    }, 500);
+
+    return () => {
+      /**
+       * Clear the timer, or you'll get an error
+       * timer will continue working even after component
+       * has been unmounted, to avoid that lacky of memory, we use
+       * the cleaunp of useEffect
+       */
+      clearTimeout(timer);
+
+      console.log('Removing profiles for testing purpose.');
+      dispatch(setData([]));
+    };
   }, [dispatch]);
 
   const handleCreate = (values) => {

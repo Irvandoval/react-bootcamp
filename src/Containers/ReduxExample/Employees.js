@@ -16,7 +16,7 @@ export const Employees = (props) => {
   };
 
   return (
-    <Box gridArea="main1" background="light-1" pad="medium" gap="medium">
+    <Box background="light-1" pad="medium" gap="medium" fill>
       <Heading level="3" margin="none" color="brand">
         Hey look!, Here's a list of employees
       </Heading>

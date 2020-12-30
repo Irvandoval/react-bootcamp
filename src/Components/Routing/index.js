@@ -9,7 +9,10 @@ import APIInteractions from '../../Containers/APIInteractions';
 import ReduxExample from '../../Containers/ReduxExample';
 import ReduxToolkit from '../../Containers/ReduxToolkit';
 import ReactQuery from '../../Containers/ReactQuery';
+import Contentful from '../../Containers/Contentful';
+import Entry from '../../Containers/Contentful/Components/Entry';
 import NoMatch from './NoMatch';
+import { Box } from 'grommet';
 
 /**
  * Home will be <Main> component, to avoid matching to
@@ -19,7 +22,7 @@ import NoMatch from './NoMatch';
  */
 function Routing() {
   return (
-    <div>
+    <Box width="xxlarge">
       <Switch>
         <Route exact path="/">
           <Main />
@@ -48,11 +51,17 @@ function Routing() {
         <Route path="/react-query">
           <ReactQuery />
         </Route>
+        <Route path="/contentful/entries/:id?">
+          <Entry />
+        </Route>
+        <Route path="/contentful">
+          <Contentful />
+        </Route>
         <Route path="*">
           <NoMatch />
         </Route>
       </Switch>
-    </div>
+    </Box>
   );
 }
 

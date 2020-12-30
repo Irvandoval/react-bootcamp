@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  CloudSoftware,
   Code,
   Connect,
   GraphQl,
@@ -56,5 +57,10 @@ export const routes = [
     to: '/react-query',
     icon: <GraphQl color="light-1" />,
     text: 'React Query',
+  },
+  {
+    to: '/contentful',
+    icon: <CloudSoftware color="light-1" />,
+    text: 'Contentful',
   },
 ];

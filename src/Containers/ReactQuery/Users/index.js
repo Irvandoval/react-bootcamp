@@ -20,34 +20,18 @@ function Users() {
     data: users,
   } = useQuery('fetchUsers', async () => {
     const { data } = await Axios.get(
-      `https://gorest.co.in/public-api/users?page=68`
-      /* the page number (68) depends on users pagination info
-       when you make a GET request https://gorest.co.in/public-api/users 
-        {
-          "code": 200,
-          "meta": {
-            "pagination": {
-              "total": 1354,
-              "pages": 68, // THIS ONE!!
-              "page": 1,
-              "limit": 20
-            }
-          }
-          ...
-        }
-      */
+      `https://gorest.co.in/public-api/users?page=70`
     );
     return data.data;
   });
 
   const [postUser] = useMutation(
-    (data) =>{
-      return Axios.post('https://gorest.co.in/public-api/users', data, {
+    (data) =>
+      Axios.post('https://gorest.co.in/public-api/users', data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-    },
+      }),
     {
       onSuccess: () => {
         // Query Invalidations
@@ -99,6 +83,7 @@ function Users() {
             <Button icon={<UserAdd />} label="Add User" onClick={onOpen} />
             <Button icon={<Sync />} label="Refresh Data" onClick={onRefresh} />
           </Box>
+
           <DataTable
             background={{
               header: 'controls',

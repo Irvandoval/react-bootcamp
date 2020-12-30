@@ -15,10 +15,10 @@ function Products() {
       setLoading(true);
 
       try {
-        const { data : { data } } = await Axios.get(
+        const { data } = await Axios.get(
           `https://gorest.co.in/public-api/products`
         );
-        setProducts(data);
+        setProducts(data.data);
       } catch (error) {
         setError(true);
         console.error(error);

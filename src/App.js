@@ -38,6 +38,14 @@ const theme = {
       height: '20px',
     },
   },
+  card: {
+    container: {
+      elevation: 'large',
+    },
+    footer: {
+      pad: 'medium',
+    },
+  },
 };
 
 const AppBar = (props) => (
@@ -76,7 +84,7 @@ function App() {
         <Grommet theme={theme} full>
           <ResponsiveContext.Consumer>
             {(size) => (
-              <Box>
+              <Box fill>
                 <AppBar>
                   <Heading level="4" margin="none">
                     Hey look!, I'm using Groomet

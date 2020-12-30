@@ -1,37 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Grid, Main } from 'grommet';
+import { Box, Layer } from 'grommet';
 import { connect } from 'react-redux';
 import Employees from './Employees';
 import FormLayout from './Form';
+import { openSideForm, setSelectedEmployeeId } from '../../redux/actions';
 
 function ReduxExample(props) {
+  const closeSideForm = () => {
+    props.setSelectedEmployeeId(null);
+    props.openSideForm(false);
+  };
+
   return (
-    <Main pad="medium">
-      <Grid>
-        <Box align="stretch" pad={{ horizontal: 'large' }}>
-          <Grid
-            areas={[
-              { name: 'main1', start: [0, 0], end: [0, 0] },
-              { name: 'main2', start: [1, 0], end: [1, 0] },
-            ]}
-            columns={['auto', 'auto']}
-            rows={['auto']}
-            gap="small"
-            pad="medium"
-            fill
-          >
-            <Employees />
-            {props.formIsOpen && <FormLayout key={props.selectedEmployeeId} />}
-          </Grid>
-        </Box>
-      </Grid>
-    </Main>
+    <Box align="stretch" pad={{ horizontal: 'large' }}>
+      <Employees />
+
+      {props.formIsOpen && (
+        <Layer
+          position="right"
+          full="vertical"
+          modal
+          onClickOutside={closeSideForm}
+          onEsc={closeSideForm}
+        >
+          <FormLayout key={props.selectedEmployeeId} />
+        </Layer>
+      )}
+    </Box>
   );
 }
 
 ReduxExample.propTypes = {
   formIsOpen: PropTypes.bool,
+  setSelectedEmployeeId: PropTypes.func,
+  openSideForm: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -41,6 +44,9 @@ const mapStateToProps = (state) => ({
     : 'none',
 });
 
-const actions = {};
+const actions = {
+  setSelectedEmployeeId,
+  openSideForm,
+};
 
 export default connect(mapStateToProps, actions)(ReduxExample);

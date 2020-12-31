@@ -2,9 +2,14 @@
   "name": "focus-react-bootcamp",
   "version": "0.1.0",
   "private": true,
-  "contributors": [{
-   "name": "Irvin Sandoval"
-  }],
+  "contributors": [
+    {
+      "name": "Irvin Sandoval"
+    },
+    {
+      "name": "Irvin Sandoval2"
+    }
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
